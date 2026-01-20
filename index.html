@@ -2,14 +2,14 @@
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SSH | Sherzod Suvonov</title>
     <style>
         :root { --accent: #00d2ff; --yellow: #ffcc00; --glass: rgba(255, 255, 255, 0.08); }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
         
         body {
-            margin: 0; font-family: 'Inter', -apple-system, sans-serif;
+            margin: 0; font-family: 'Inter', sans-serif;
             background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), 
                         url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=2000');
             background-size: cover; background-position: center; background-attachment: fixed;
@@ -41,40 +41,41 @@
             padding: 5px; margin-bottom: 20px; object-fit: cover; box-shadow: 0 0 30px rgba(0, 210, 255, 0.5);
         }
 
-        /* --- TUGMALAR --- */
-        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 30px; }
-        .glass-btn {
+        /* --- TUGMALAR VA KO'K NEON EFFEKT --- */
+        .glass-btn, .card {
             background: var(--glass); border: 1px solid rgba(255,255,255,0.1); padding: 16px;
             border-radius: 15px; color: white; text-decoration: none; font-weight: 600;
-            text-align: center; transition: 0.3s;
+            text-align: center; transition: 0.3s; display: flex; align-items: center; justify-content: center;
         }
 
-        .card {
-            background: var(--glass); border: 1px solid rgba(255,255,255,0.1); padding: 20px;
-            border-radius: 20px; margin-bottom: 15px; display: flex; align-items: center;
-            text-decoration: none; color: white; transition: 0.3s;
-        }
+        .card { justify-content: flex-start; margin-bottom: 12px; }
 
-        /* SARIQ EFFEKT */
+        /* Siz xohlagandek bosilganda KO'K neon yonishi */
         .glass-btn:active, .card:active {
-            background: var(--yellow) !important; color: black !important;
-            box-shadow: 0 0 40px var(--yellow); transform: scale(0.95); border-color: var(--yellow);
+            background: rgba(0, 210, 255, 0.2) !important;
+            color: white !important;
+            box-shadow: 0 0 30px var(--accent);
+            transform: scale(0.95);
+            border-color: var(--accent);
         }
-        .card:active b, .card:active small { color: black !important; }
 
-        .icon-box { font-size: 30px; margin-right: 20px; }
-        .card-info b { font-size: 18px; display: block; }
-        .card-info small { color: #aaa; font-size: 12px; }
-
-        /* --- UZBEKISTAN SECTION --- */
-        .uzb-box {
-            background: linear-gradient(45deg, rgba(0,123,255,0.1), rgba(40,167,69,0.1));
-            border-radius: 25px; padding: 25px; border: 1px solid rgba(255,255,255,0.05); margin-top: 40px;
+        /* --- FEEDBACK (BAHOLASH) TIZIMI --- */
+        .feedback-box {
+            background: rgba(255,255,255,0.05); border-radius: 20px; padding: 25px;
+            margin: 40px 0; border: 1px dashed rgba(255,255,255,0.2); text-align: center;
         }
-        .uzb-flag { height: 4px; display: flex; margin-bottom: 15px; border-radius: 2px; overflow: hidden; }
-        .f-blue { flex: 1; background: #0099b5; } .f-white { flex: 1; background: white; } .f-green { flex: 1; background: #1eb53a; }
+        .f-btns { display: flex; gap: 10px; margin-top: 15px; }
+        .f-btn { flex: 1; padding: 15px; border-radius: 12px; border: none; cursor: pointer; font-weight: bold; transition: 0.2s; color: white; }
+        .btn-good { background: #28a745; }
+        .btn-bad { background: #dc3545; }
+        #f-res { margin-top: 15px; font-size: 14px; display: none; padding: 15px; border-radius: 10px; line-height: 1.5; }
 
-        /* --- ANIMATSIYALAR --- */
+        /* --- AI O'ZBEKISTON KENGAYTIRILGAN MA'LUMOT --- */
+        .ai-section {
+            background: linear-gradient(45deg, rgba(0,153,181,0.1), rgba(30,181,58,0.1));
+            border-radius: 25px; padding: 25px; border-left: 5px solid var(--accent); margin-top: 40px;
+        }
+
         @keyframes blink { 50% { opacity: 0.2; } }
         @keyframes neon { from { box-shadow: 0 0 5px #fff; } to { box-shadow: 0 0 20px var(--accent); } }
 
@@ -99,47 +100,53 @@
 <div class="container">
     <div class="profile">
         <img src="rasm.jpg" alt="Sherzod Suvonov">
-        <h1 style="margin: 0; font-size: 28px; letter-spacing: 1px;">Sherzod Suvonov</h1>
-        <p id="uni" style="color: var(--accent); font-size: 13px; font-weight: 700; margin-top: 5px;">Tashkent State University of Economics</p>
+        <h1 style="margin: 0; font-size: 28px;">Sherzod Suvonov</h1>
+        <p id="uni" style="color: var(--accent); font-size: 13px; font-weight: 700;">Tashkent State University of Economics</p>
     </div>
 
-    <div class="btn-grid">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 30px;">
         <a href="https://t.me/werrrzood" target="_blank" class="glass-btn">✈️ Telegram</a>
         <a href="https://instagram.com/werrrzood" target="_blank" class="glass-btn">📸 Instagram</a>
     </div>
 
-    <h2 id="proj-h" style="font-size: 14px; color: var(--accent); letter-spacing: 2px; margin-bottom: 20px;">LOYIHALAR & PORTFOLIO</h2>
+    <h2 id="proj-h" style="font-size: 14px; color: var(--accent); letter-spacing: 2px;">LOYIHALAR & PORTFOLIO</h2>
     
     <div class="projects">
-        <a href="https://suvonov2310-a11y.github.io/SWA/" target="_blank" class="card">
-            <div class="icon-box">🎬</div>
-            <div class="card-info"><b>SWA Video Portal</b><small id="swa-d">YouTube uslubidagi video platforma</small></div>
-        </a>
-        <a href="https://t.me/ChatAl_gptBot" target="_blank" class="card">
-            <div class="icon-box">🤖</div>
-            <div class="card-info"><b>ChatAl GPT Bot</b><small id="bot-d">Aqlli AI yordamchi boti</small></div>
-        </a>
-        <a href="https://werrrzood.onrender.com" target="_blank" class="card">
-            <div class="icon-box">♟️</div>
-            <div class="card-info"><b>Online Shashka</b><small id="game-d">Multiplayer strategiya o'yini</small></div>
-        </a>
+        <a href="https://suvonov2310-a11y.github.io/SWA/" class="card">🎬 <b>SWA Video Portal</b></a>
+        <a href="https://t.me/ChatAl_gptBot" class="card">🤖 <b>ChatAl GPT Bot</b></a>
+        <a href="https://werrrzood.onrender.com" class="card">♟️ <b>Online Shashka</b></a>
     </div>
 
-    <div class="uzb-box">
-        <div class="uzb-flag"><div class="f-blue"></div><div class="f-white"></div><div class="f-green"></div></div>
-        <h3 id="uzb-h" style="margin: 0 0 10px; font-size: 18px;">IT O'zbekiston 2026</h3>
-        <p id="uzb-p" style="font-size: 13px; color: #ccc; margin: 0;">O'zbekiston raqamli kelajagi va IT eksportini 5 milliard dollarga yetkazish yo'lida!</p>
+    <div class="feedback-box">
+        <b id="f-title">Sayt sizga yoqdimi?</b>
+        <div class="f-btns">
+            <button class="f-btn btn-good" onclick="sendVote(true)">👍 Zo'r!</button>
+            <button class="f-btn btn-bad" onclick="sendVote(false)">👎 Yoqmadi</button>
+        </div>
+        <div id="f-res"></div>
     </div>
 
-    <footer style="text-align: center; padding: 40px 0; font-size: 10px; color: #444; letter-spacing: 2px;">
-        &copy; 2026 SSH BREAND | BUILDING REALITY
+    <div class="ai-section">
+        <h3 id="uzb-h" style="margin: 0 0 15px; color: var(--accent);">Sun'iy Intellekt va O'zbekiston</h3>
+        <p id="uzb-p" style="font-size: 14px; line-height: 1.7; color: #ddd; margin: 0;">
+            O'zbekiston 2026-yilga kelib mintaqaviy IT-markazga aylanishni maqsad qilgan. Prezidentimiz tomonidan 
+            sun'iy intellekt texnologiyalarini joriy etish bo'yicha maxsus strategiya tasdiqlangan. Bugungi kunda 
+            yosh dasturchilar uchun IT-Parklar orqali keng imkoniyatlar yaratilmoqda. Sun'iy intellekt nafaqat 
+            iqtisodiyotni, balki ta'lim va tibbiyotni ham yangi bosqichga olib chiqmoqda. Biz raqamli kelajakni 
+            birgalikda quramiz!
+        </p>
+    </div>
+
+    <footer style="text-align: center; padding: 40px 0; font-size: 11px; color: #666;">
+        &copy; 2026 SSH BREAND | BUILDING REALITY <br>
+        <a href="https://t.me/werrrzood" style="color: var(--accent); text-decoration: none;">Bog'lanish: @werrrzood</a>
     </footer>
 </div>
 
 <script>
     const data = {
-        uz: { uni: "Tashkent State University of Economics", proj: "LOYIHALAR & PORTFOLIO", swa: "YouTube uslubidagi video platforma", bot: "Aqlli AI yordamchi boti", game: "Multiplayer strategiya o'yini", uzbh: "IT O'zbekiston 2026", uzbp: "O'zbekiston raqamli kelajagi va IT eksportini 5 milliard dollarga yetkazish yo'lida!" },
-        ru: { uni: "Ташкентский Экономический Университет", proj: "ПРОЕКТЫ & ПОРТФОЛИО", swa: "Видеоплатформа в стиле YouTube", bot: "Умный ИИ помощник", game: "Мультиплеерная стратегия", uzbh: "IT Узбекистан 2026", uzbp: "Цифровое будущее Узбекистана и экспорт IT-услуг до 5 млрд долларов!" }
+        uz: { uni: "Tashkent State University of Economics", proj: "LOYIHALAR & PORTFOLIO", f_title: "Sayt sizga yoqdimi?", uzbh: "Sun'iy Intellekt va O'zbekiston" },
+        ru: { uni: "Ташкентский Экономический Университет", proj: "ПРОЕКТЫ & ПОРТФОЛИО", f_title: "Вам нравится сайт?", uzbh: "ИИ и Узбекистан" }
     };
 
     function setLang(l, b) {
@@ -147,11 +154,20 @@
         b.classList.add('active');
         document.getElementById('uni').innerText = data[l].uni;
         document.getElementById('proj-h').innerText = data[l].proj;
-        document.getElementById('swa-d').innerText = data[l].swa;
-        document.getElementById('bot-d').innerText = data[l].bot;
-        document.getElementById('game-d').innerText = data[l].game;
+        document.getElementById('f-title').innerText = data[l].f_title;
         document.getElementById('uzb-h').innerText = data[l].uzbh;
-        document.getElementById('uzb-p').innerText = data[l].uzbp;
+    }
+
+    function sendVote(isGood) {
+        const res = document.getElementById('f-res');
+        res.style.display = 'block';
+        if(isGood) {
+            res.style.background = 'rgba(40, 167, 69, 0.2)';
+            res.innerHTML = "<b>Zo'r, yoqqanidan xursandmiz!</b> 😊 <br> Takliflaringiz bo'lsa: <a href='https://t.me/werrrzood' style='color:white'>@werrrzood</a>";
+        } else {
+            res.style.background = 'rgba(220, 53, 69, 0.2)';
+            res.innerHTML = "<b>Kechirasiz!</b> 😔 <br> Kamchilik yoki muammoni aytsangiz, albatta to'g'irlaymiz: <a href='https://t.me/werrrzood' style='color:white'>@werrrzood</a>";
+        }
     }
 </script>
 </body>
