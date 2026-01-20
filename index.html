@@ -5,61 +5,154 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SSH | Sherzod Suvonov</title>
     <style>
-        :root { --accent: #00d2ff; --yellow: #ffcc00; }
-        body { margin: 0; font-family: sans-serif; background: #0a0a0a; color: white; text-align: center; }
-        header { background: rgba(255,255,255,0.05); padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; }
-        .ssh-box { background: white; color: black; padding: 5px 12px; border-radius: 8px; font-weight: bold; }
-        .container { padding: 20px; max-width: 400px; margin: auto; }
-        .profile img { width: 120px; height: 120px; border-radius: 50%; border: 3px solid white; object-fit: cover; }
+        :root { --accent: #00d2ff; --yellow: #ffcc00; --glass: rgba(255, 255, 255, 0.08); }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
         
-        /* Sariq effektli tugmalar */
-        .btn { 
-            display: block; background: rgba(255,255,255,0.1); padding: 15px; margin: 10px 0; 
-            border-radius: 12px; color: white; text-decoration: none; transition: 0.2s; border: 1px solid #333;
-        }
-        .btn:active { 
-            background: var(--yellow) !important; color: black !important; 
-            box-shadow: 0 0 20px var(--yellow); transform: scale(0.95);
+        body {
+            margin: 0; font-family: 'Inter', -apple-system, sans-serif;
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), 
+                        url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=2000');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            color: white; min-height: 100vh; overflow-x: hidden;
         }
 
-        .lang-btn { background: #333; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; }
-        .active-lang { background: var(--accent); color: black; }
+        /* --- SSH BREND NAVBAR --- */
+        header {
+            position: sticky; top: 0; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(15px);
+            padding: 15px 25px; display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 2px solid var(--accent); z-index: 1000; box-shadow: 0 5px 20px rgba(0, 210, 255, 0.2);
+        }
+
+        .ssh-logo {
+            background: white; color: black; padding: 8px 18px; border-radius: 12px;
+            font-weight: 900; font-size: 22px; letter-spacing: 2px;
+            box-shadow: 0 0 15px white; animation: neon 2s infinite alternate;
+        }
+
+        .live-indicator { display: flex; align-items: center; gap: 6px; color: #ff4b2b; font-weight: 800; font-size: 12px; }
+        .dot { width: 8px; height: 8px; background: #ff4b2b; border-radius: 50%; animation: blink 1s infinite; }
+
+        .container { width: 92%; max-width: 550px; margin: 30px auto; }
+
+        /* --- PROFIL --- */
+        .profile { text-align: center; margin-bottom: 40px; }
+        .profile img { 
+            width: 130px; height: 130px; border-radius: 50%; border: 4px solid var(--accent);
+            padding: 5px; margin-bottom: 20px; object-fit: cover; box-shadow: 0 0 30px rgba(0, 210, 255, 0.5);
+        }
+
+        /* --- TUGMALAR --- */
+        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 30px; }
+        .glass-btn {
+            background: var(--glass); border: 1px solid rgba(255,255,255,0.1); padding: 16px;
+            border-radius: 15px; color: white; text-decoration: none; font-weight: 600;
+            text-align: center; transition: 0.3s;
+        }
+
+        .card {
+            background: var(--glass); border: 1px solid rgba(255,255,255,0.1); padding: 20px;
+            border-radius: 20px; margin-bottom: 15px; display: flex; align-items: center;
+            text-decoration: none; color: white; transition: 0.3s;
+        }
+
+        /* SARIQ EFFEKT */
+        .glass-btn:active, .card:active {
+            background: var(--yellow) !important; color: black !important;
+            box-shadow: 0 0 40px var(--yellow); transform: scale(0.95); border-color: var(--yellow);
+        }
+        .card:active b, .card:active small { color: black !important; }
+
+        .icon-box { font-size: 30px; margin-right: 20px; }
+        .card-info b { font-size: 18px; display: block; }
+        .card-info small { color: #aaa; font-size: 12px; }
+
+        /* --- UZBEKISTAN SECTION --- */
+        .uzb-box {
+            background: linear-gradient(45deg, rgba(0,123,255,0.1), rgba(40,167,69,0.1));
+            border-radius: 25px; padding: 25px; border: 1px solid rgba(255,255,255,0.05); margin-top: 40px;
+        }
+        .uzb-flag { height: 4px; display: flex; margin-bottom: 15px; border-radius: 2px; overflow: hidden; }
+        .f-blue { flex: 1; background: #0099b5; } .f-white { flex: 1; background: white; } .f-green { flex: 1; background: #1eb53a; }
+
+        /* --- ANIMATSIYALAR --- */
+        @keyframes blink { 50% { opacity: 0.2; } }
+        @keyframes neon { from { box-shadow: 0 0 5px #fff; } to { box-shadow: 0 0 20px var(--accent); } }
+
+        .lang-switch { display: flex; gap: 5px; background: #111; padding: 4px; border-radius: 10px; }
+        .l-btn { border: none; background: none; color: #555; padding: 5px 10px; cursor: pointer; font-weight: bold; border-radius: 6px; }
+        .l-btn.active { background: var(--accent); color: black; }
     </style>
 </head>
 <body>
-    <header>
-        <div class="ssh-box">SSH</div>
-        <div>
-            <button class="lang-btn active-lang" onclick="changeLang('uz', this)">UZ</button>
-            <button class="lang-btn" onclick="changeLang('ru', this)">RU</button>
+
+<header>
+    <div class="ssh-logo">SSH</div>
+    <div style="display: flex; align-items: center; gap: 15px;">
+        <div class="live-indicator"><div class="dot"></div> LIVE</div>
+        <div class="lang-switch">
+            <button class="l-btn active" onclick="setLang('uz', this)">UZ</button>
+            <button class="l-btn" onclick="setLang('ru', this)">RU</button>
         </div>
-    </header>
-    <div class="container">
-        <div class="profile">
-            <img src="rasm.jpg" alt="Sherzod">
-            <h2 style="margin: 10px 0 5px;">Sherzod Suvonov</h2>
-            <p id="uni" style="color: var(--accent); font-size: 13px;">Tashkent State University of Economics</p>
-        </div>
-        <div style="display: flex; gap: 10px;">
-            <a href="https://t.me/werrrzood" class="btn" style="flex: 1;">Telegram</a>
-            <a href="https://instagram.com/werrrzood" class="btn" style="flex: 1;">Instagram</a>
-        </div>
-        <h3 id="title" style="text-align: left; font-size: 14px; margin-top: 20px;">LOYIHALAR</h3>
-        <a href="https://suvonov2310-a11y.github.io/SWA/" class="btn">🎬 SWA Video Portal</a>
-        <a href="https://t.me/ChatAl_gptBot" class="btn">🤖 ChatAl GPT Bot</a>
+    </div>
+</header>
+
+<div class="container">
+    <div class="profile">
+        <img src="rasm.jpg" alt="Sherzod Suvonov">
+        <h1 style="margin: 0; font-size: 28px; letter-spacing: 1px;">Sherzod Suvonov</h1>
+        <p id="uni" style="color: var(--accent); font-size: 13px; font-weight: 700; margin-top: 5px;">Tashkent State University of Economics</p>
     </div>
 
-    <script>
-        const texts = {
-            uz: { uni: "Tashkent State University of Economics", title: "LOYIHALAR" },
-            ru: { uni: "Ташкентский Экономический Университет", title: "ПРОЕКТЫ" }
-        };
-        function changeLang(l, b) {
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active-lang'));
-            b.classList.add('active-lang');
-            document.getElementById('uni').innerText = texts[l].uni;
-            document.getElementById('title').innerText = texts[l].title;
-        }
-    </script>
+    <div class="btn-grid">
+        <a href="https://t.me/werrrzood" target="_blank" class="glass-btn">✈️ Telegram</a>
+        <a href="https://instagram.com/werrrzood" target="_blank" class="glass-btn">📸 Instagram</a>
+    </div>
+
+    <h2 id="proj-h" style="font-size: 14px; color: var(--accent); letter-spacing: 2px; margin-bottom: 20px;">LOYIHALAR & PORTFOLIO</h2>
+    
+    <div class="projects">
+        <a href="https://suvonov2310-a11y.github.io/SWA/" target="_blank" class="card">
+            <div class="icon-box">🎬</div>
+            <div class="card-info"><b>SWA Video Portal</b><small id="swa-d">YouTube uslubidagi video platforma</small></div>
+        </a>
+        <a href="https://t.me/ChatAl_gptBot" target="_blank" class="card">
+            <div class="icon-box">🤖</div>
+            <div class="card-info"><b>ChatAl GPT Bot</b><small id="bot-d">Aqlli AI yordamchi boti</small></div>
+        </a>
+        <a href="https://werrrzood.onrender.com" target="_blank" class="card">
+            <div class="icon-box">♟️</div>
+            <div class="card-info"><b>Online Shashka</b><small id="game-d">Multiplayer strategiya o'yini</small></div>
+        </a>
+    </div>
+
+    <div class="uzb-box">
+        <div class="uzb-flag"><div class="f-blue"></div><div class="f-white"></div><div class="f-green"></div></div>
+        <h3 id="uzb-h" style="margin: 0 0 10px; font-size: 18px;">IT O'zbekiston 2026</h3>
+        <p id="uzb-p" style="font-size: 13px; color: #ccc; margin: 0;">O'zbekiston raqamli kelajagi va IT eksportini 5 milliard dollarga yetkazish yo'lida!</p>
+    </div>
+
+    <footer style="text-align: center; padding: 40px 0; font-size: 10px; color: #444; letter-spacing: 2px;">
+        &copy; 2026 SSH BREAND | BUILDING REALITY
+    </footer>
+</div>
+
+<script>
+    const data = {
+        uz: { uni: "Tashkent State University of Economics", proj: "LOYIHALAR & PORTFOLIO", swa: "YouTube uslubidagi video platforma", bot: "Aqlli AI yordamchi boti", game: "Multiplayer strategiya o'yini", uzbh: "IT O'zbekiston 2026", uzbp: "O'zbekiston raqamli kelajagi va IT eksportini 5 milliard dollarga yetkazish yo'lida!" },
+        ru: { uni: "Ташкентский Экономический Университет", proj: "ПРОЕКТЫ & ПОРТФОЛИО", swa: "Видеоплатформа в стиле YouTube", bot: "Умный ИИ помощник", game: "Мультиплеерная стратегия", uzbh: "IT Узбекистан 2026", uzbp: "Цифровое будущее Узбекистана и экспорт IT-услуг до 5 млрд долларов!" }
+    };
+
+    function setLang(l, b) {
+        document.querySelectorAll('.l-btn').forEach(btn => btn.classList.remove('active'));
+        b.classList.add('active');
+        document.getElementById('uni').innerText = data[l].uni;
+        document.getElementById('proj-h').innerText = data[l].proj;
+        document.getElementById('swa-d').innerText = data[l].swa;
+        document.getElementById('bot-d').innerText = data[l].bot;
+        document.getElementById('game-d').innerText = data[l].game;
+        document.getElementById('uzb-h').innerText = data[l].uzbh;
+        document.getElementById('uzb-p').innerText = data[l].uzbp;
+    }
+</script>
 </body>
 </html>
