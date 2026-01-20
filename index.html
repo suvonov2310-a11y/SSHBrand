@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSH | Sherzod Suvonov</title>
+    <style>
+        :root { --accent: #00d2ff; --yellow: #ffcc00; }
+        body { margin: 0; font-family: sans-serif; background: #0a0a0a; color: white; text-align: center; }
+        header { background: rgba(255,255,255,0.05); padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; }
+        .ssh-box { background: white; color: black; padding: 5px 12px; border-radius: 8px; font-weight: bold; }
+        .container { padding: 20px; max-width: 400px; margin: auto; }
+        .profile img { width: 120px; height: 120px; border-radius: 50%; border: 3px solid white; object-fit: cover; }
+        
+        /* Sariq effektli tugmalar */
+        .btn { 
+            display: block; background: rgba(255,255,255,0.1); padding: 15px; margin: 10px 0; 
+            border-radius: 12px; color: white; text-decoration: none; transition: 0.2s; border: 1px solid #333;
+        }
+        .btn:active { 
+            background: var(--yellow) !important; color: black !important; 
+            box-shadow: 0 0 20px var(--yellow); transform: scale(0.95);
+        }
+
+        .lang-btn { background: #333; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; }
+        .active-lang { background: var(--accent); color: black; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="ssh-box">SSH</div>
+        <div>
+            <button class="lang-btn active-lang" onclick="changeLang('uz', this)">UZ</button>
+            <button class="lang-btn" onclick="changeLang('ru', this)">RU</button>
+        </div>
+    </header>
+    <div class="container">
+        <div class="profile">
+            <img src="rasm.jpg" alt="Sherzod">
+            <h2 style="margin: 10px 0 5px;">Sherzod Suvonov</h2>
+            <p id="uni" style="color: var(--accent); font-size: 13px;">Tashkent State University of Economics</p>
+        </div>
+        <div style="display: flex; gap: 10px;">
+            <a href="https://t.me/werrrzood" class="btn" style="flex: 1;">Telegram</a>
+            <a href="https://instagram.com/werrrzood" class="btn" style="flex: 1;">Instagram</a>
+        </div>
+        <h3 id="title" style="text-align: left; font-size: 14px; margin-top: 20px;">LOYIHALAR</h3>
+        <a href="https://suvonov2310-a11y.github.io/SWA/" class="btn">🎬 SWA Video Portal</a>
+        <a href="https://t.me/ChatAl_gptBot" class="btn">🤖 ChatAl GPT Bot</a>
+    </div>
+
+    <script>
+        const texts = {
+            uz: { uni: "Tashkent State University of Economics", title: "LOYIHALAR" },
+            ru: { uni: "Ташкентский Экономический Университет", title: "ПРОЕКТЫ" }
+        };
+        function changeLang(l, b) {
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active-lang'));
+            b.classList.add('active-lang');
+            document.getElementById('uni').innerText = texts[l].uni;
+            document.getElementById('title').innerText = texts[l].title;
+        }
+    </script>
+</body>
+</html>
