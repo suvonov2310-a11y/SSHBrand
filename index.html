@@ -4,171 +4,210 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SSH | Sherzod Suvonov</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --accent: #00d2ff; --yellow: #ffcc00; --glass: rgba(255, 255, 255, 0.08); }
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
+        :root { 
+            --accent: #00d2ff; 
+            --bg: #020617;
+            --card-bg: #0f172a;
+            --glass: rgba(255, 255, 255, 0.05); 
+        }
+        
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; transition: 0.3s; }
         
         body {
             margin: 0; font-family: 'Inter', sans-serif;
-            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), 
-                        url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=2000');
-            background-size: cover; background-position: center; background-attachment: fixed;
+            background: radial-gradient(circle at top right, #1e293b, #020617);
             color: white; min-height: 100vh; overflow-x: hidden;
         }
 
-        /* --- SSH BREND NAVBAR --- */
+        /* --- NAVBAR --- */
         header {
-            position: sticky; top: 0; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(15px);
+            position: sticky; top: 0; background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(15px);
             padding: 15px 25px; display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 2px solid var(--accent); z-index: 1000; box-shadow: 0 5px 20px rgba(0, 210, 255, 0.2);
+            border-bottom: 1px solid rgba(0, 210, 255, 0.3); z-index: 1000;
         }
 
         .ssh-logo {
-            background: white; color: black; padding: 8px 18px; border-radius: 12px;
-            font-weight: 900; font-size: 22px; letter-spacing: 2px;
-            box-shadow: 0 0 15px white; animation: neon 2s infinite alternate;
+            background: white; color: black; padding: 6px 15px; border-radius: 8px;
+            font-weight: 900; font-size: 20px; letter-spacing: 1px;
+            box-shadow: 0 0 15px var(--accent);
         }
 
-        .live-indicator { display: flex; align-items: center; gap: 6px; color: #ff4b2b; font-weight: 800; font-size: 12px; }
-        .dot { width: 8px; height: 8px; background: #ff4b2b; border-radius: 50%; animation: blink 1s infinite; }
+        .lang-switch { display: flex; gap: 5px; background: #111; padding: 4px; border-radius: 8px; }
+        .l-btn { border: none; background: none; color: #555; padding: 5px 10px; cursor: pointer; font-weight: bold; border-radius: 5px; }
+        .l-btn.active { background: var(--accent); color: black; }
 
-        .container { width: 92%; max-width: 550px; margin: 30px auto; }
+        .container { width: 92%; max-width: 600px; margin: 30px auto; }
 
         /* --- PROFIL --- */
-        .profile { text-align: center; margin-bottom: 40px; }
+        .profile { text-align: center; margin-bottom: 40px; position: relative; }
         .profile img { 
-            width: 130px; height: 130px; border-radius: 50%; border: 4px solid var(--accent);
-            padding: 5px; margin-bottom: 20px; object-fit: cover; box-shadow: 0 0 30px rgba(0, 210, 255, 0.5);
+            width: 140px; height: 140px; border-radius: 50%; border: 3px solid var(--accent);
+            padding: 5px; margin-bottom: 15px; object-fit: cover;
+            box-shadow: 0 0 30px rgba(0, 210, 255, 0.3);
+        }
+        .online-badge {
+            position: absolute; top: 110px; right: calc(50% - 65px);
+            width: 18px; height: 18px; background: #22c55e; border: 3px solid var(--bg); border-radius: 50%;
         }
 
-        /* --- TUGMALAR VA KO'K NEON EFFEKT --- */
-        .glass-btn, .card {
-            background: var(--glass); border: 1px solid rgba(255,255,255,0.1); padding: 16px;
-            border-radius: 15px; color: white; text-decoration: none; font-weight: 600;
-            text-align: center; transition: 0.3s; display: flex; align-items: center; justify-content: center;
+        /* --- TUGMALAR --- */
+        .grid-links { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 30px; }
+        .glass-btn {
+            background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1); padding: 14px;
+            border-radius: 12px; color: white; text-decoration: none; font-weight: 600;
+            text-align: center; font-size: 14px;
         }
 
-        .card { justify-content: flex-start; margin-bottom: 12px; }
+        .section-h { font-size: 12px; color: var(--accent); letter-spacing: 2px; margin: 40px 0 20px; text-transform: uppercase; }
 
-        /* Siz xohlagandek bosilganda KO'K neon yonishi */
+        /* LOYIHA KARTASI */
+        .card {
+            background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1); padding: 18px;
+            border-radius: 16px; margin-bottom: 15px; display: flex; align-items: center;
+            text-decoration: none; color: white; position: relative; overflow: hidden;
+        }
+        .card:hover { border-color: var(--accent); transform: translateY(-3px); }
+        .icon-box { font-size: 28px; margin-right: 18px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 12px; }
+        .card b { font-size: 17px; display: block; margin-bottom: 4px; }
+        .card small { color: #94a3b8; font-size: 12px; line-height: 1.4; }
+
+        /* BOSILGANDA KO'K NEON */
         .glass-btn:active, .card:active {
             background: rgba(0, 210, 255, 0.2) !important;
-            color: white !important;
-            box-shadow: 0 0 30px var(--accent);
-            transform: scale(0.95);
-            border-color: var(--accent);
+            box-shadow: 0 0 25px var(--accent);
+            transform: scale(0.96);
         }
 
-        /* --- FEEDBACK (BAHOLASH) TIZIMI --- */
-        .feedback-box {
-            background: rgba(255,255,255,0.05); border-radius: 20px; padding: 25px;
-            margin: 40px 0; border: 1px dashed rgba(255,255,255,0.2); text-align: center;
+        /* --- IT O'ZBEKISTON PROGRESS --- */
+        .ai-box {
+            background: linear-gradient(to bottom right, #0f172a, #1e293b);
+            border-radius: 20px; padding: 25px; border: 1px solid rgba(0, 210, 255, 0.1); margin-top: 30px;
         }
-        .f-btns { display: flex; gap: 10px; margin-top: 15px; }
-        .f-btn { flex: 1; padding: 15px; border-radius: 12px; border: none; cursor: pointer; font-weight: bold; transition: 0.2s; color: white; }
-        .btn-good { background: #28a745; }
-        .btn-bad { background: #dc3545; }
-        #f-res { margin-top: 15px; font-size: 14px; display: none; padding: 15px; border-radius: 10px; line-height: 1.5; }
-
-        /* --- AI O'ZBEKISTON KENGAYTIRILGAN MA'LUMOT --- */
-        .ai-section {
-            background: linear-gradient(45deg, rgba(0,153,181,0.1), rgba(30,181,58,0.1));
-            border-radius: 25px; padding: 25px; border-left: 5px solid var(--accent); margin-top: 40px;
+        .progress-container { background: rgba(255,255,255,0.1); height: 8px; border-radius: 10px; margin: 15px 0; overflow: hidden; }
+        .progress-bar { 
+            width: 65%; height: 100%; background: var(--accent); 
+            box-shadow: 0 0 15px var(--accent); animation: grow 2s ease-out;
         }
 
-        @keyframes blink { 50% { opacity: 0.2; } }
-        @keyframes neon { from { box-shadow: 0 0 5px #fff; } to { box-shadow: 0 0 20px var(--accent); } }
+        /* --- FEEDBACK --- */
+        .fb-box { text-align: center; margin-top: 40px; padding: 20px; border-top: 1px solid rgba(255,255,255,0.05); }
+        .fb-btns { display: flex; gap: 10px; justify-content: center; margin-top: 15px; }
+        .fb-btn { padding: 10px 25px; border-radius: 8px; border: none; cursor: pointer; font-weight: bold; color: white; }
 
-        .lang-switch { display: flex; gap: 5px; background: #111; padding: 4px; border-radius: 10px; }
-        .l-btn { border: none; background: none; color: #555; padding: 5px 10px; cursor: pointer; font-weight: bold; border-radius: 6px; }
-        .l-btn.active { background: var(--accent); color: black; }
+        @keyframes grow { from { width: 0; } to { width: 65%; } }
+        @keyframes blink { 50% { opacity: 0.3; } }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="ssh-logo">SSH</div>
-    <div style="display: flex; align-items: center; gap: 15px;">
-        <div class="live-indicator"><div class="dot"></div> LIVE</div>
-        <div class="lang-switch">
-            <button class="l-btn active" onclick="setLang('uz', this)">UZ</button>
-            <button class="l-btn" onclick="setLang('ru', this)">RU</button>
-        </div>
+    <div class="ssh-logo">SSH BRAND</div>
+    <div class="lang-switch">
+        <button class="l-btn" id="btn-uz" onclick="setLang('uz')">UZ</button>
+        <button class="l-btn" id="btn-ru" onclick="setLang('ru')">RU</button>
     </div>
 </header>
 
 <div class="container">
     <div class="profile">
         <img src="rasm.jpg" alt="Sherzod Suvonov">
+        <div class="online-badge"></div>
         <h1 style="margin: 0; font-size: 28px;">Sherzod Suvonov</h1>
-        <p id="uni" style="color: var(--accent); font-size: 13px; font-weight: 700;">Tashkent State University of Economics</p>
+        <p id="uni" style="color: var(--accent); font-size: 13px; font-weight: 700; margin-top: 5px;">Tashkent State University of Economics</p>
     </div>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 30px;">
-        <a href="https://t.me/werrrzood" target="_blank" class="glass-btn">✈️ Telegram</a>
-        <a href="https://instagram.com/werrrzood" target="_blank" class="glass-btn">📸 Instagram</a>
+    <div class="grid-links">
+        <a href="https://t.me/werrrzood" target="_blank" class="glass-btn"><i class="fab fa-telegram"></i> Telegram</a>
+        <a href="https://instagram.com/werrrzood" target="_blank" class="glass-btn"><i class="fab fa-instagram"></i> Instagram</a>
     </div>
 
-    <h2 id="proj-h" style="font-size: 14px; color: var(--accent); letter-spacing: 2px;">LOYIHALAR & PORTFOLIO</h2>
+    <h2 id="proj-h" class="section-h">Loyiha & Portfolio</h2>
     
     <div class="projects">
-        <a href="https://suvonov2310-a11y.github.io/SWA/" class="card">🎬 <b>SWA Video Portal</b></a>
-        <a href="https://t.me/ChatAl_gptBot" class="card">🤖 <b>ChatAl GPT Bot</b></a>
-        <a href="https://werrrzood.onrender.com" class="card">♟️ <b>Online Shashka</b></a>
+        <a href="https://suvonov2310-a11y.github.io/SWA/" class="card">
+            <div class="icon-box">🎬</div>
+            <div><b id="swa-t">SWA Video Portal</b><small id="swa-d">YouTube uslubidagi video platforma</small></div>
+        </a>
+        <a href="https://t.me/ChatAl_gptBot" class="card">
+            <div class="icon-box">🤖</div>
+            <div><b id="bot-t">ChatAl GPT Bot</b><small id="bot-d">Aqlli AI yordamchi boti</small></div>
+        </a>
+        <a href="https://werrrzood.onrender.com" class="card">
+            <div class="icon-box">♟️</div>
+            <div><b id="game-t">Online Shashka</b><small id="game-d">Multiplayer strategiya o'yini</small></div>
+        </a>
     </div>
 
-    <div class="feedback-box">
-        <b id="f-title">Sayt sizga yoqdimi?</b>
-        <div class="f-btns">
-            <button class="f-btn btn-good" onclick="sendVote(true)">👍 Zo'r!</button>
-            <button class="f-btn btn-bad" onclick="sendVote(false)">👎 Yoqmadi</button>
+    <div class="ai-box">
+        <h3 id="uzb-h" style="margin: 0; font-size: 18px;">IT O'zbekiston 2026</h3>
+        <p id="uzb-p" style="font-size: 13px; color: #94a3b8; margin: 10px 0 0;">IT eksportini $5 mlrdga yetkazish yo'lida.</p>
+        <div class="progress-container"><div class="progress-bar"></div></div>
+        <div style="display: flex; justify-content: space-between; font-size: 10px; color: var(--accent); font-weight: bold;">
+            <span>START: 2022</span>
+            <span>GOAL: 2026</span>
         </div>
-        <div id="f-res"></div>
     </div>
 
-    <div class="ai-section">
-        <h3 id="uzb-h" style="margin: 0 0 15px; color: var(--accent);">Sun'iy Intellekt va O'zbekiston</h3>
-        <p id="uzb-p" style="font-size: 14px; line-height: 1.7; color: #ddd; margin: 0;">
-            O'zbekiston 2026-yilga kelib mintaqaviy IT-markazga aylanishni maqsad qilgan. Prezidentimiz tomonidan 
-            sun'iy intellekt texnologiyalarini joriy etish bo'yicha maxsus strategiya tasdiqlangan. Bugungi kunda 
-            yosh dasturchilar uchun IT-Parklar orqali keng imkoniyatlar yaratilmoqda. Sun'iy intellekt nafaqat 
-            iqtisodiyotni, balki ta'lim va tibbiyotni ham yangi bosqichga olib chiqmoqda. Biz raqamli kelajakni 
-            birgalikda quramiz!
-        </p>
+    <div class="fb-box">
+        <span id="fb-q">Sayt yoqdimi?</span>
+        <div class="fb-btns">
+            <button class="fb-btn" style="background: #22c55e;" onclick="alert('Rahmat! 😊')">👍</button>
+            <button class="fb-btn" style="background: #ef4444;" onclick="alert('Xatolarni @werrrzood ga yuboring!')">👎</button>
+        </div>
     </div>
 
-    <footer style="text-align: center; padding: 40px 0; font-size: 11px; color: #666;">
-        &copy; 2026 SSH BREAND | BUILDING REALITY <br>
-        <a href="https://t.me/werrrzood" style="color: var(--accent); text-decoration: none;">Bog'lanish: @werrrzood</a>
+    <footer style="text-align: center; padding: 40px 0; font-size: 10px; color: #444; letter-spacing: 2px;">
+        &copy; 2026 SSH BRAND | BUILDING REALITY
     </footer>
 </div>
 
 <script>
-    const data = {
-        uz: { uni: "Tashkent State University of Economics", proj: "LOYIHALAR & PORTFOLIO", f_title: "Sayt sizga yoqdimi?", uzbh: "Sun'iy Intellekt va O'zbekiston" },
-        ru: { uni: "Ташкентский Экономический Университет", proj: "ПРОЕКТЫ & ПОРТФОЛИО", f_title: "Вам нравится сайт?", uzbh: "ИИ и Узбекистан" }
+    const translations = {
+        uz: { 
+            uni: "Tashkent State University of Economics", 
+            proj: "Loyiha & Portfolio", 
+            swa_d: "YouTube uslubidagi video platforma",
+            bot_d: "Aqlli AI yordamchi boti",
+            game_d: "Multiplayer strategiya o'yini",
+            uzbh: "IT O'zbekiston 2026",
+            uzbp: "IT eksportini $5 mlrdga yetkazish yo'lida.",
+            fbq: "Sayt yoqdimi?"
+        },
+        ru: { 
+            uni: "Ташкентский Экономический Университет", 
+            proj: "Проекты & Портфолио", 
+            swa_d: "Видеоплатформа в стиле YouTube",
+            bot_d: "Умный ИИ помощник",
+            game_d: "Мультиплеерная стратегия",
+            uzbh: "IT Узбекистан 2026",
+            uzbp: "Цель: довести IT-экспорт до $5 млрд.",
+            fbq: "Вам нравится сайт?"
+        }
     };
 
-    function setLang(l, b) {
-        document.querySelectorAll('.l-btn').forEach(btn => btn.classList.remove('active'));
-        b.classList.add('active');
-        document.getElementById('uni').innerText = data[l].uni;
-        document.getElementById('proj-h').innerText = data[l].proj;
-        document.getElementById('f-title').innerText = data[l].f_title;
-        document.getElementById('uzb-h').innerText = data[l].uzbh;
+    function setLang(lang) {
+        localStorage.setItem('selectedLang', lang);
+        document.querySelectorAll('.l-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById('btn-' + lang).classList.add('active');
+        
+        const t = translations[lang];
+        document.getElementById('uni').innerText = t.uni;
+        document.getElementById('proj-h').innerText = t.proj;
+        document.getElementById('swa-d').innerText = t.swa_d;
+        document.getElementById('bot-d').innerText = t.bot_d;
+        document.getElementById('game-d').innerText = t.game_d;
+        document.getElementById('uzb-h').innerText = t.uzbh;
+        document.getElementById('uzb-p').innerText = t.uzbp;
+        document.getElementById('fb-q').innerText = t.fbq;
     }
 
-    function sendVote(isGood) {
-        const res = document.getElementById('f-res');
-        res.style.display = 'block';
-        if(isGood) {
-            res.style.background = 'rgba(40, 167, 69, 0.2)';
-            res.innerHTML = "<b>Zo'r, yoqqanidan xursandmiz!</b> 😊 <br> Takliflaringiz bo'lsa: <a href='https://t.me/werrrzood' style='color:white'>@werrrzood</a>";
-        } else {
-            res.style.background = 'rgba(220, 53, 69, 0.2)';
-            res.innerHTML = "<b>Kechirasiz!</b> 😔 <br> Kamchilik yoki muammoni aytsangiz, albatta to'g'irlaymiz: <a href='https://t.me/werrrzood' style='color:white'>@werrrzood</a>";
-        }
-    }
+    // Sahifa yuklanganda tilni tekshirish
+    window.onload = () => {
+        const savedLang = localStorage.getItem('selectedLang') || 'uz';
+        setLang(savedLang);
+    };
 </script>
 </body>
 </html>
