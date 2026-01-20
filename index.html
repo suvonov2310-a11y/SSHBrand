@@ -2,251 +2,201 @@
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sherzod Suvonov | Professional Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SSH | Sherzod Suvonov</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-deep: #020617;
-            --card-bg: #0f172a;
-            --accent-blue: #38bdf8;
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --border-glow: rgba(56, 189, 248, 0.2);
+            --accent: #00d2ff;
+            --bg-dark: #020617;
+            --card-bg: rgba(15, 23, 42, 0.8);
+            --text-main: #f8fafc;
         }
 
         body {
-            background-color: var(--bg-deep);
-            color: var(--text-primary);
-            font-family: 'Inter', system-ui, sans-serif;
-            margin: 0;
-            padding: 0;
-            line-height: 1.5;
+            margin: 0; font-family: 'Inter', sans-serif;
+            background: linear-gradient(rgba(2, 6, 23, 0.9), rgba(2, 6, 23, 0.9)), 
+                        url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            color: var(--text-main); line-height: 1.6;
         }
 
-        .main-wrapper {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 40px 20px;
+        /* --- LOGOTIP VA NAVBAR --- */
+        header {
+            position: sticky; top: 0; background: rgba(2, 6, 23, 0.95);
+            padding: 12px 20px; display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 2px solid var(--accent); z-index: 1000;
         }
 
-        /* --- HEADER SECTION --- */
-        .hero-section {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 40px;
-            margin-bottom: 60px;
-            flex-wrap: wrap;
+        .ssh-logo {
+            background: white; color: black; padding: 6px 15px; border-radius: 8px;
+            font-weight: 900; font-size: 22px; letter-spacing: 2px; box-shadow: 0 0 15px var(--accent);
         }
 
-        .hero-text h1 {
-            font-size: clamp(32px, 5vw, 48px);
-            margin: 0;
-            letter-spacing: -1px;
+        .lang-switch { display: flex; gap: 5px; background: #111; padding: 4px; border-radius: 8px; }
+        .l-btn { border: none; background: none; color: #555; padding: 5px 12px; cursor: pointer; font-weight: bold; border-radius: 5px; }
+        .l-btn.active { background: var(--accent); color: black; }
+
+        .container { width: 94%; max-width: 600px; margin: 30px auto; }
+
+        /* --- PROFIL --- */
+        .profile { text-align: center; margin-bottom: 35px; }
+        .profile img { 
+            width: 140px; height: 140px; border-radius: 50%; border: 4px solid var(--accent);
+            padding: 5px; margin-bottom: 15px; object-fit: cover; box-shadow: 0 0 30px rgba(0, 210, 255, 0.4);
         }
 
-        .hero-text p {
-            font-size: 18px;
-            color: var(--accent-blue);
-            margin: 10px 0 20px;
-            font-weight: 500;
+        .social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 30px; }
+        .soc-btn { 
+            background: var(--card-bg); border: 1px solid rgba(0, 210, 255, 0.2); 
+            padding: 12px; border-radius: 12px; color: white; text-decoration: none; 
+            text-align: center; font-weight: 600; font-size: 14px;
         }
 
-        .profile-box {
-            position: relative;
-        }
-
-        .profile-box img {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            border: 4px solid var(--accent-blue);
-            box-shadow: 0 0 40px var(--border-glow);
-        }
-
-        /* --- PROJECTS GRID --- */
-        .section-title {
-            font-size: 24px;
-            margin: 40px 0 25px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
+        /* --- MUKAMMAL TUGMALAR (LOYIHALAR) --- */
+        .section-h { font-size: 14px; color: var(--accent); letter-spacing: 2px; margin: 30px 0 15px; text-transform: uppercase; border-left: 3px solid var(--accent); padding-left: 10px; }
 
         .project-card {
-            background: var(--card-bg);
-            border: 1px solid #1e293b;
-            border-radius: 20px;
-            overflow: hidden;
-            transition: 0.4s;
+            background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 18px; margin-bottom: 15px; overflow: hidden;
+            text-decoration: none; color: white; display: block;
+        }
+        .card-img { width: 100%; height: 140px; background-size: cover; background-position: center; position: relative; }
+        .card-body { padding: 15px; }
+        .card-body b { font-size: 18px; display: block; }
+        .card-body p { font-size: 13px; color: #94a3b8; margin: 5px 0 15px; }
+        
+        .start-btn { 
+            background: var(--accent); color: black; padding: 8px 0; border-radius: 8px; 
+            text-align: center; font-weight: 800; font-size: 14px; text-transform: uppercase;
         }
 
-        .project-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-blue);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-        }
+        /* Effektlar */
+        .project-card:active, .soc-btn:active { transform: scale(0.97); box-shadow: 0 0 20px var(--accent); border-color: var(--accent); }
 
-        .p-thumb {
-            height: 180px;
-            background: #1e293b;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 40px;
-        }
+        /* --- FOYDALI SAYTLAR --- */
+        .extra-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+        .extra-btn { background: rgba(255,255,255,0.05); padding: 15px 5px; border-radius: 12px; text-align: center; text-decoration: none; color: #ccc; font-size: 11px; font-weight: bold; border: 1px solid rgba(255,255,255,0.05); }
 
-        .p-info { padding: 20px; }
-        .p-info h3 { margin: 0 0 10px; font-size: 20px; }
-        .p-info p { color: var(--text-secondary); font-size: 14px; margin-bottom: 20px; }
-
-        /* --- CASE STUDY SECTION --- */
-        .case-study {
-            background: var(--card-bg);
-            border-radius: 24px;
-            padding: 30px;
-            margin-top: 50px;
-            border: 1px solid #1e293b;
-        }
-
-        .case-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; gap: 20px; }
-
-        .tech-tags {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-        }
-
-        .tech-item {
-            background: #1e293b;
-            padding: 8px 15px;
-            border-radius: 8px;
-            font-size: 13px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .tech-item i { color: var(--accent-blue); }
-
-        /* --- SKILLS PILLS --- */
-        .skills-pills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 30px;
-        }
-
-        .skill-pill {
-            background: rgba(56, 189, 248, 0.1);
-            color: var(--accent-blue);
-            padding: 10px 20px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            margin-top: 100px;
-            padding: 40px 0;
-            border-top: 1px solid #1e293b;
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 14px;
-        }
-
-        @media (max-width: 768px) {
-            .hero-section { text-align: center; justify-content: center; }
-            .case-header { flex-direction: column; }
-        }
-
-        /* Click Animation */
-        .project-card:active { transform: scale(0.98); background: rgba(56, 189, 248, 0.05); }
+        footer { text-align: center; padding: 50px 0; font-size: 11px; color: #444; letter-spacing: 1px; }
     </style>
 </head>
 <body>
 
-<div class="main-wrapper">
-    <header class="hero-section">
-        <div class="hero-text">
-            <h1>Sherzod Suvonov</h1>
-            <p>Full-Stack Developer & Software Engineer</p>
-            <div style="display: flex; gap: 15px;">
-                <a href="https://t.me/werrrzood" style="color: white; text-decoration: none; background: #38bdf8; padding: 10px 25px; border-radius: 12px; font-weight: bold;"><i class="fab fa-telegram"></i> Telegram</a>
-                <a href="https://github.com/suvonov2310-a11y" style="color: white; text-decoration: none; border: 1px solid #1e293b; padding: 10px 25px; border-radius: 12px;"><i class="fab fa-github"></i> GitHub</a>
-            </div>
-        </div>
-        <div class="profile-box">
-            <img src="rasm.jpg" alt="Sherzod Suvonov">
-        </div>
-    </header>
+<header>
+    <div class="ssh-logo">SSH</div>
+    <div class="lang-switch">
+        <button class="l-btn active" id="uz-btn" onclick="setLang('uz')">UZ</button>
+        <button class="l-btn" id="ru-btn" onclick="setLang('ru')">RU</button>
+    </div>
+</header>
 
-    <h2 class="section-title"><i class="fas fa-code"></i> My Projects</h2>
-    <div class="project-grid">
-        <div class="project-card">
-            <div class="p-thumb">🎬</div>
-            <div class="p-info">
-                <h3>SWA Video Portal</h3>
-                <p>An enterprise-grade video management system with real-time streaming features.</p>
-                <div class="skill-pill" style="display: inline-block;">Live Demo</div>
-            </div>
-        </div>
-        <div class="project-card">
-            <div class="p-thumb">🤖</div>
-            <div class="p-info">
-                <h3>ChatAl GPT Bot</h3>
-                <p>AI-powered Telegram assistant specialized in task automation and user help.</p>
-                <div class="skill-pill" style="display: inline-block;">Active Bot</div>
-            </div>
-        </div>
+<div class="container">
+    <div class="profile">
+        <img src="rasm.jpg" alt="Sherzod Suvonov">
+        <h1 style="margin: 0; font-size: 26px;">Sherzod Suvonov</h1>
+        <p id="job" style="color: var(--accent); font-size: 14px; font-weight: 600;">Full-Stack Developer</p>
+        <p style="font-size: 14px; margin-top: -10px;"><i class="fas fa-phone"></i> +998 90 048 23 10</p>
     </div>
 
-    <h2 class="section-title"><i class="fas fa-chart-line"></i> SaaS Case Study</h2>
-    <div class="case-study">
-        <div class="case-header">
-            <div style="flex: 1;">
-                <h3 style="margin-top: 0;">Task Management Platform</h3>
-                <p style="color: var(--text-secondary); font-size: 14px;">Optimizing workflow and team performance through advanced data visualization.</p>
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=500" style="width: 100%; border-radius: 15px; margin-top: 15px;" alt="Data Analysis">
-            </div>
-            <div style="width: 250px;">
-                <h4 style="font-size: 14px; color: var(--accent-blue);">Key Technologies 🚀</h4>
-                <div class="tech-tags">
-                    <div class="tech-item"><i class="fab fa-react"></i> Next.js</div>
-                    <div class="tech-item"><i class="fas fa-bolt"></i> Tailwind</div>
-                    <div class="tech-item"><i class="fab fa-node-js"></i> NestJS</div>
-                    <div class="tech-item"><i class="fas fa-database"></i> PostgreSQL</div>
-                    <div class="tech-item"><i class="fab fa-aws"></i> AWS S3</div>
-                    <div class="tech-item"><i class="fas fa-fire"></i> Redis</div>
-                </div>
-            </div>
-        </div>
+    <div class="social-grid">
+        <a href="https://t.me/werrrzood" class="soc-btn"><i class="fab fa-telegram"></i> Telegram</a>
+        <a href="https://instagram.com/werrrzood" class="soc-btn"><i class="fab fa-instagram"></i> Instagram</a>
     </div>
 
-    <h2 class="section-title"><i class="fas fa-tools"></i> Technologies & Skills</h2>
-    <div class="skills-pills">
-        <div class="skill-pill">TypeScript</div>
-        <div class="skill-pill">JavaScript</div>
-        <div class="skill-pill">React</div>
-        <div class="skill-pill">Node.js</div>
-        <div class="skill-pill">PostgreSQL</div>
-        <div class="skill-pill">Redis</div>
-        <div class="skill-pill">Docker</div>
-        <div class="skill-pill">Git & GitHub</div>
+    <h2 id="title-1" class="section-h">Mening Loyihalarim</h2>
+
+    <a href="https://suvonov2310-a11y.github.io/SWA/" class="project-card">
+        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1536240478700-b869070f9279?q=80&w=1000');"></div>
+        <div class="card-body">
+            <b id="p1-t">SWA Video Portal</b>
+            <p id="p1-d">Video tomosha qilish va yuklash uchun maxsus platforma.</p>
+            <div class="start-btn" id="start-1">Boshlash</div>
+        </div>
+    </a>
+
+    <a href="https://werrrzood.onrender.com" class="project-card">
+        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1586165368502-1bad197a6461?q=80&w=1000');"></div>
+        <div class="card-body">
+            <b id="p2-t">Online Shashka</b>
+            <p id="p2-d">Do'stlar bilan real-vaqtda shashka o'yini.</p>
+            <div class="start-btn" id="start-2">O'yinga kirish</div>
+        </div>
+    </a>
+
+    <a href="https://t.me/ChatAl_gptBot" class="project-card">
+        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1000');"></div>
+        <div class="card-body">
+            <b id="p3-t">ChatAl GPT Bot</b>
+            <p id="p3-d">Sun'iy intellekt asosida ishlovchi aqlli yordamchi.</p>
+            <div class="start-btn" id="start-3">Botni ochish</div>
+        </div>
+    </a>
+
+    <h2 id="title-2" class="section-h">Foydali Linklar</h2>
+    <div class="extra-grid">
+        <a href="https://youtube.com" class="extra-btn"><i class="fab fa-youtube" style="color:red; font-size: 20px;"></i><br>YouTube</a>
+        <a href="https://kun.uz" class="extra-btn"><i class="fas fa-newspaper" style="color:var(--accent); font-size: 20px;"></i><br>Kun.uz</a>
+        <a href="https://yandex.uz" class="extra-btn"><i class="fab fa-yandex" style="color:red; font-size: 20px;"></i><br>Yandex</a>
     </div>
 
     <footer>
-        &copy; 2026 SSH BRAND | Building Digital Reality in Uzbekistan
+        &copy; 2026 SSH BRAND | BUILDING REALITY
     </footer>
 </div>
 
+<script>
+    const data = {
+        uz: {
+            job: "Full-Stack Developer",
+            t1: "Mening Loyihalarim",
+            t2: "Foydali Linklar",
+            p1t: "SWA Video Portal",
+            p1d: "Video tomosha qilish va yuklash uchun maxsus platforma.",
+            p2t: "Online Shashka",
+            p2d: "Do'stlar bilan real-vaqtda shashka o'yini.",
+            p3t: "ChatAl GPT Bot",
+            p3d: "Sun'iy intellekt asosida ishlovchi aqlli yordamchi.",
+            s1: "Boshlash", s2: "O'yinga kirish", s3: "Botni ochish"
+        },
+        ru: {
+            job: "Full-Stack Разработчик",
+            t1: "Мои Проекты",
+            t2: "Полезные Ссылки",
+            p1t: "SWA Видео Портал",
+            p1d: "Специальная платформа для просмотра и загрузки видео.",
+            p2t: "Онлайн Шашки",
+            p2d: "Игра в шашки с друзьями в реальном времени.",
+            p3t: "ChatAl GPT Бот",
+            p3d: "Умный помощник на базе искусственного интеллекта.",
+            s1: "Запустить", s2: "Войти в игру", s3: "Открыть бота"
+        }
+    };
+
+    function setLang(lang) {
+        localStorage.setItem('lang', lang);
+        document.querySelectorAll('.l-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(lang + '-btn').classList.add('active');
+        
+        const l = data[lang];
+        document.getElementById('job').innerText = l.job;
+        document.getElementById('title-1').innerText = l.t1;
+        document.getElementById('title-2').innerText = l.t2;
+        document.getElementById('p1-t').innerText = l.p1t;
+        document.getElementById('p1-d').innerText = l.p1d;
+        document.getElementById('p2-t').innerText = l.p2t;
+        document.getElementById('p2-d').innerText = l.p2d;
+        document.getElementById('p3-t').innerText = l.p3t;
+        document.getElementById('p3-d').innerText = l.p3d;
+        document.getElementById('start-1').innerText = l.s1;
+        document.getElementById('start-2').innerText = l.s2;
+        document.getElementById('start-3').innerText = l.s3;
+    }
+
+    window.onload = () => {
+        const saved = localStorage.getItem('lang') || 'uz';
+        setLang(saved);
+    };
+</script>
 </body>
 </html>
